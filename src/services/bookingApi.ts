@@ -1,5 +1,7 @@
 import { type BookingRequest, type BookingResponse } from "../interfaces/interfaces";
 
+const API_KEY = import.meta.env.VITE_API_KEY;
+
 async function createBooking(
   data: BookingRequest
 ): Promise<BookingResponse> {
@@ -7,7 +9,7 @@ async function createBooking(
     method: "POST",
     headers: {
       "Content-type": "application/json",
-      "x-api-key": "strajk-1Cqgm3S6nlMechWO",
+      "x-api-key": API_KEY,
     },
     body: JSON.stringify(data),
   });
