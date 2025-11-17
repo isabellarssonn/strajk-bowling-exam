@@ -1,4 +1,5 @@
 import {useState, useEffect } from "react";
+import "./shoeForm.css"
 
 interface ShoeFormProps {
     people: number;
@@ -26,25 +27,32 @@ function Shoeform({ people, shoes, setShoes}: ShoeFormProps) {
 
     useEffect(() => {
         if (shoes.length !== people) {
-            setError(`Number of shoe (${shoes.length}) does not match the number of players (${people})`);
+            setError(`Number of shoes (${shoes.length}) does not match the number of bowlers (${people}).`);
         } else {
             setError(null);
         }
     }, [shoes, people]);
 
   return (
-    <section className="shoe__form">
-        <h2 className="shoes__title">Shoes</h2>
+    <section className="shoe__section">
+        <div className="shoe-title__section">
+            <span className="line"></span>
+            <h2 className="shoe__title">Shoes</h2>
+            <span className="line"></span>
+        </div>
         {shoes.map((size, i) => (
             <div key={i} className="shoe__row">
-                Shoe size / person {i + 1}
+                <label className="label">Shoe size / person {i + 1}</label>
                 <input
+                className="input"
                 type="number"
                 value={size || ""}
                 onChange={e => updateShoeSize(i, Number(e.target.value))}
                 required
                 />
-                <button className="remove__btn" type="button" onClick={() => removeShoe(i)}>-</button>
+                <div className="button__wrapper">
+                    <button className="remove__btn" type="button" onClick={() => removeShoe(i)}>-</button>
+                </div>
             </div>
         ))}
         <button className="add__btn" type="button" onClick={addShoe}>+</button>
