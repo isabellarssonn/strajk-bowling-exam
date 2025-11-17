@@ -1,7 +1,10 @@
-.booking__section {
+.booking__form {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.booking__section {
     width: 90%;
     margin: 0 auto;
 }
@@ -76,4 +79,20 @@
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {
     display: none;
+}
+
+.submit__button {
+    width: 90%;
+    color: var(--light-pink);
+    background-color: var(--dark-pink);
+    font-family: var(--secondary-font);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    letter-spacing: 2px;
+    padding: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
 }
