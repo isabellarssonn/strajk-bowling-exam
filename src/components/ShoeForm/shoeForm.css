@@ -75,10 +75,3 @@
     border-radius: 50%;
     padding-top: 0.5rem;
 }
-
-.error__msg {
-    text-align: center;
-    width: 80%;
-    font-family: var(--secondary-font);
-    margin-top: 1.5rem;
-}

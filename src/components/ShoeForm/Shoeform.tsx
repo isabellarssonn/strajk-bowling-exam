@@ -1,4 +1,3 @@
-import {useState, useEffect } from "react";
 import "./shoeForm.css"
 
 interface ShoeFormProps {
@@ -7,8 +6,7 @@ interface ShoeFormProps {
     setShoes: (sizes: number[]) => void;
 }
 
-function Shoeform({ people, shoes, setShoes}: ShoeFormProps) {
-    const [error, setError] = useState<string | null>(null);
+function Shoeform({ shoes, setShoes}: ShoeFormProps) {
 
     function updateShoeSize(index: number, size: number) {
         const updated = [...shoes];
@@ -24,14 +22,6 @@ function Shoeform({ people, shoes, setShoes}: ShoeFormProps) {
     function addShoe() {
         setShoes([...shoes, 0]);
     }
-
-    useEffect(() => {
-        if (shoes.length !== people) {
-            setError(`Number of shoes (${shoes.length}) does not match the number of bowlers (${people}).`);
-        } else {
-            setError(null);
-        }
-    }, [shoes, people]);
 
   return (
     <section className="shoe__section">
@@ -56,7 +46,6 @@ function Shoeform({ people, shoes, setShoes}: ShoeFormProps) {
             </div>
         ))}
         <button className="add__btn" type="button" onClick={addShoe}>+</button>
-        {error && <p className="error__msg">{error}</p>}
     </section>
   )
 }

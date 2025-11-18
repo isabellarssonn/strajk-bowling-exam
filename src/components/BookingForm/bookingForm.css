@@ -96,3 +96,11 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     margin-top: 2rem;
     margin-bottom: 3rem;
 }
+
+.error__msg {
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+    font-family: var(--secondary-font);
+    margin-top: 1.5rem;
+}

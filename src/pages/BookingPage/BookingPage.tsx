@@ -6,19 +6,22 @@ import type { BookingRequest } from "../../interfaces/interfaces";
 import "./bookingPage.css"
 
 function BookingPage() {
-  const {submitBooking} = useBooking();
+  const { submitBooking, error } = useBooking();
   const navigate = useNavigate();
 
   async function handleSubmit(data: BookingRequest) {
-    const result = await submitBooking(data);
-    if (result) {
-      navigate("/confirmation", { state: result });
+    const booking = await submitBooking(data);
+    if (booking) {
+      navigate("/confirmation", { state: booking });
     }
   }
   return (
     <section className="booking__page page">
       <Header title="Booking" />
-      <BookingForm onSubmit={handleSubmit}/>
+      <BookingForm 
+      onSubmit={handleSubmit}
+      apiError={error}
+      />
     </section>
   )
 }

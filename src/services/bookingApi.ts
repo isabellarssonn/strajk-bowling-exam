@@ -15,7 +15,7 @@ async function createBooking(
   });
 
   if(!response.ok) {
-    throw new Error('Kunde inte genomföra bokning, försök igen!')
+    throw new Error('Unable to complete booking, try again!')
   }
 
   return response.json();
