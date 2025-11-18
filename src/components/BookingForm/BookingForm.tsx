@@ -5,17 +5,31 @@ import "./bookingForm.css"
 
 interface BookingFormProps {
     onSubmit: (data: BookingRequest) => void;
+    apiError?: string | null;
 }
 
-function BookingForm({ onSubmit }: BookingFormProps) {
+function BookingForm({ onSubmit, apiError }: BookingFormProps) {
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
     const [people, setPeople] = useState(1);
     const [lanes, setLanes] = useState(1);
     const [shoes, setShoes] = useState<number[]>([0]);
+    const [formError, setFormError] = useState<string | null>(null);
+
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
+        setFormError(null);
+
+        if (people > lanes * 4) {
+            setFormError(`You can only have ${lanes * 4} people with ${lanes} lane(s).`);
+            return;
+        }
+
+        if (shoes.length !== people) {
+            setFormError(`Number of shoes (${shoes.length}) does not match the number of bowlers (${people}).`);
+            return;
+        }
         
         const when = `${date}T${time}`;
 
@@ -68,7 +82,6 @@ function BookingForm({ onSubmit }: BookingFormProps) {
                     value={people}
                     onChange={e => setPeople(Number(e.target.value))}
                     min={1}
-                    max={lanes * 4}
                     required
                     />
             </div>
@@ -92,6 +105,9 @@ function BookingForm({ onSubmit }: BookingFormProps) {
         shoes={shoes}
         setShoes={setShoes}
         />
+
+        {formError && <p className="error__msg">{formError}</p>}
+        {apiError && <p className="error__msg">{apiError}</p>}
 
         <button className="submit__button" type="submit">
             Striiiiiike!
