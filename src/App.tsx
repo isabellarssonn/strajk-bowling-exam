@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import BookingPage from "./pages/BookingPage/BookingPage"
 import ConfirmationPage from "./pages/ConfirmationPage/ConfirmationPage"
 import ErrorPage from "./pages/ErrorPage/ErrorPage"
-import LoadingPage from "./pages/LoadingPage/LoadingPage"
 
 const router = createBrowserRouter([
   {
@@ -13,10 +12,6 @@ const router = createBrowserRouter([
   {
     path: "/confirmation",
     element: <ConfirmationPage />
-  },
-  {
-    path: "/loading",
-    element: <LoadingPage />
   }
 ])
 
