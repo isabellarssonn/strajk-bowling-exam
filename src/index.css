@@ -13,6 +13,11 @@
   --light-pink: #FFF4F2;
   --purple: #441D81;
   --black: #1B1919;
+  --black-pink: #361C21;
   --primary-font: "Bebas Neue", sans-serif;
   --secondary-font: "Work Sans", sans-serif;
+}
+
+.app {
+  max-width: 430px;
 }
