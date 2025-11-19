@@ -1,4 +1,5 @@
 import Logo from '../Logo/Logo'
+import NavMenu from '../NavMenu/NavMenu'
 import "./header.css"
 
 interface HeaderProps {
@@ -8,6 +9,7 @@ interface HeaderProps {
 function Header({ title }: HeaderProps) {
   return (
     <section className='header'>
+        <NavMenu />
         <Logo />
         <h1 className='header__title'>{title}</h1>
     </section>
