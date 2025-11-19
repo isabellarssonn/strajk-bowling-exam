@@ -1,7 +1,13 @@
 import Logo from "../../components/Logo/Logo"
 import "./loadingPage.css"
 
-function LoadingPage() {
+interface LoadingProps {
+  visible: boolean;
+}
+
+function LoadingPage({ visible }: LoadingProps) {
+  if (!visible) return null;
+  
   return (
     <section className="loading__page page">
         <Logo large/>
