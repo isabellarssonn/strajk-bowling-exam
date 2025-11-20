@@ -1,0 +1,13 @@
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
+.header__title {
+    font-family: var(--primary-font);
+    color: var(--dark-pink);
+    font-size: 3.2rem;
+    letter-spacing: 4px;
+    text-align: center;
+    margin-top: 1rem;
+}

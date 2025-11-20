@@ -1,0 +1,8 @@
+.error__page {
+    background-color: var(--light-pink);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 6rem;
+}
