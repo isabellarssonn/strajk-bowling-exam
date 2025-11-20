@@ -1,73 +1,94 @@
-# React + TypeScript + Vite
+# Individuell examination: Strajk bowling
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Bakgrund
 
-Currently, two official plugins are available:
+**Strajk bowling är en nyöppnad bowlinghall i centrala Bromölla. Ägaren K. Ägla gillar tekniska lösningar och har tillsammans med brorsonen Keso Ägla [designat en mockup](https://www.figma.com/design/INM5DgClQ78fVvlbIaor07/Strajk-1.0-Typescript?node-id=0-1&t=Egt6IzRwlgVn9aZh-1).**
+**Herr Ägla är väldigt nöjd med designen och vill att appen ser ut och fungerar enligt angiven spec. Gränssnittet behöver endast vara anpassat efter mobila enheter.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Val av tekniker
 
-## React Compiler
+- React
+- Typescript
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Krav på funktionalitet
 
-## Expanding the ESLint configuration
+- Det ska gå att boka en bana för N antal personer
+- Det ska gå att boka N antal skor
+- Det ska gå att se en bekräftelse på sin bokning
+- På grund av att K.Ägla sitter på en ganska dålig server som är ganska instabil så ungefär var femte gång så kommer det inte gå att genomföra en bokning och API:et returnerar ett felmeddelande istället. Detta fel ska hanteras och lämpligt meddelande ska visas för användaren
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| View Namn    | Funktionalitet                                                                                         |
+| ------------ | -------------------------------------------------------------------------------------------------------|
+| Booking      | Användaren ska kunna boka _datum_ och _tid_ samt ange _antal spelare_. Vid val av spelare skall formulär för skobokning dyka upp. Vid knapp på strike skickas _request_ iväg till servern. |
+| Confirmation | Vid ivägskickad request fås en bokning tillbaka inkl totalsumma ( 120kr / pers + 100kr / bana )och bokningsnummer.                                                                                                         |
+| Meny         | Vid klick på _naviconen_ visas menyn på lämpligt sätt.                                                 |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Figmaskiss
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Skiss: https://www.figma.com/design/INM5DgClQ78fVvlbIaor07/Strajk-1.0-Typescript?node-id=0-1&t=Egt6IzRwlgVn9aZh-1
+
+
+## Backend API
+
+Din app ska skicka en `booking request` bokningar till Strajks backend. Du får då tillbaka ett `booking response`.
+
+Se nedan för detaljer.
+
+**Main REST endpoint.**
+
+```
+POST https://731xy9c2ak.execute-api.eu-north-1.amazonaws.com/booking
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**För _Auth_, använd headern `x-api-key` i din http-request med API-nyckel som du får med nedan endpoint:**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+GET https://731xy9c2ak.execute-api.eu-north-1.amazonaws.com/key
+```
+
+## Models
+
+### Booking Model
+
+**Request**
+
+```json
+{
+  "when": "2022-11-11T18:00",
+  "lanes": 1,
+  "people": 4,
+  "shoes": [38, 39, 44, 43]
+}
+```
+
+**Response**
+
+```json
+{
+  "when": "2022-11-11T18:00",
+  "lanes": 1,
+  "people": 4,
+  "shoes": [38, 39, 44, 43],
+  "price": 580, // räknas ut på serversidan
+  "id": "str7283472", // genereras på serversidan
+  "active": true // anges på serversidan.
+}
+```
+
+## Betygskriterier
+
+**För Godkänt:**
+* Implementerat all funktionalitet
+* Ser ut som skiss (viss variation i färger, typsnitt etc är tillåtet)
+* Är gjord i Typescript 
+* Alla variabler, states, props ska ha en datatyp eller varje upptypade med en `type` eller `interface`.
+
+**För Väl Godkänt:**
+* Alla kriterier för Godkänt
+* Det ska finnas en validering kring antalet skor och spelare. Ex: om det är 4 spelare ska man ha matat in exakt 4 skostorlekar.
+* Det ska finnas validering kring antalet spelare och banor, max 4 spelare per bana.
+
+## Inlämning
+
+Inlämning sker på Azomo med en länk till ditt Github repo med din kod senast den **21/11 23:59**. 
