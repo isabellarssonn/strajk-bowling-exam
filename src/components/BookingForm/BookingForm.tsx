@@ -22,7 +22,7 @@ function BookingForm({ onSubmit, apiError }: BookingFormProps) {
         setFormError(null);
 
         if (people > lanes * 4) {
-            setFormError(`You can only have ${lanes * 4} people with ${lanes} lane(s).`);
+            setFormError(`You can only have 4 people per lane. With ${lanes} lane(s), the maximum is ${lanes * 4} people.`);
             return;
         }
 
