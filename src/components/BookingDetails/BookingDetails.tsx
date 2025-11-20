@@ -13,11 +13,11 @@ function formatWhen(iso: string) {
 }
 
 function shorterId(id: string) {
-  return id.slice(0, 8).toUpperCase();
+  return id.slice(0, 10).toUpperCase();
 }
 
 interface BookingProps {
-    booking: BookingResponse
+    booking: BookingResponse;
 }
 
 function BookingDetails({ booking }: BookingProps) {

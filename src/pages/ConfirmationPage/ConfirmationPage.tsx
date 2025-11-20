@@ -8,24 +8,22 @@ export default function ConfirmationPage() {
   const navigate = useNavigate();
   const booking = state?.bookingDetails;
 
-  if (!booking) {
-    return (
-      <section className="confirmation__page">
-        <Header title="No bookings yet" />
-        <p>There are no bookings available at the moment.</p>
-      </section>
-    )
-  }
-
   return (
     <section className="confirmation__page">
-      <Header title="See you soon!" />
-      <BookingDetails booking={booking} />
-      <div className="total__section">
-        <p className="total">total</p>
-        <p className="price">{booking.price} sek</p>
-      </div>
-      <button className="confirmation__btn" onClick={() => navigate("/")}>Sweet, lets go!</button>
+      <Header title={booking ? "See you soon!" : "No bookings yet"} />
+
+      {booking ? (
+        <>
+          <BookingDetails booking={booking} />
+          <div className="total__section">
+            <p className="total">total</p>
+            <p className="price">{booking.price} sek</p>
+          </div>
+          <button className="confirmation__btn" onClick={() => navigate("/")}>Sweet, lets go!</button>
+        </>
+      ) : (
+        <p className="error-page__msg">There are no bookings available at the moment.</p> 
+      )}
     </section>
   )
 }
