@@ -6,7 +6,7 @@ import "./confirmationPage.css"
 export default function ConfirmationPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const booking = state?.data?.bookingDetails;
+  const booking = state?.bookingDetails;
 
   return (
     <section className="confirmation__page">

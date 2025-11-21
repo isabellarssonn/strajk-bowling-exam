@@ -6,16 +6,11 @@ export interface BookingRequest {
 }
 
 export interface BookingResponse {
-    data: {
-        success: boolean;
-        bookingDetails: {
-            when: string;
-            lanes: number;
-            people: number;
-            shoes: number[];
-            price: number;
-            bookingId: string;
-            active: boolean;
-        };
-    };
-}
+    when: string;
+    lanes: number;
+    people: number;
+    shoes: number[];
+    price: number;
+    bookingId: string;
+    active: boolean;
+};
